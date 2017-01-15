@@ -1,0 +1,101 @@
+app.controller('ListingCtrl', ['CONSTANTS', 'API', '$rootScope', '$state', 'Utils', 'DataService','MAP', 'EVENTS', 'ZOMATO', function (CONSTANTS, API, $rootScope, $state, Utils, DataService, MAP, EVENTS, ZOMATO) {
+    var self = this;
+    var controller = $state.current.name;
+    var displayField,
+        map,
+        zoomValue = 15,
+        mapRefreshRequired,
+        markersList = [],
+        customerMarker;
+    self.showDetailsPanel = false;
+    self.requestParams ={};
+    self.range = [1,2,3,4,5];   
+    var getRequestOptions = function (api) {
+        return Utils.getRequestOptions({
+            api: api,
+            controller: controller,
+            details: self.requestParams
+        });
+    };
+
+    var createMarker = function (location, icon, isResta, markerDetails) {
+        var mapOptions = {
+            map: map,
+            position: new google.maps.LatLng(parseFloat(location.lat), parseFloat(location.lng)),
+            icon: icon
+        };
+        var marker = new google.maps.Marker(mapOptions);
+        marker.setMap(map);
+        if (isResta) {
+            markersList.push(marker);
+            marker.addListener('click', function() {
+                fetchRestaurantDetails(markerDetails)
+            }, markerDetails);
+        }
+    
+    }
+    
+    var fetchRestaurantDetails = function (markerDetails) {
+        self.restraDetail = markerDetails;
+        self.showDetailsPanel = true;
+        $rootScope.$digest();
+    }
+
+    var createMap = function (data) {
+        var location = {};
+        if(data) {
+            location = data.location;
+        } else {
+            location = {
+                lat: parseFloat(MAP.DEFAULT_CENTER.LAT),
+                lng: parseFloat(MAP.DEFAULT_CENTER.LNG)
+            };
+        }
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: location,
+          zoom: zoomValue
+        });
+        createMarker(location, "<%= asset_path 'consumer_webapp/customer.png' %>");
+    };
+    
+    var getDisplayField = function (data) {
+        var result = [], 
+            restraHash = {},
+            location = {};
+
+        displayField.forEach(function (displayKey) {
+            if(displayKey == displayField[0]) {
+                location.lat = data[displayKey].latitude;
+                location.lng = data[displayKey].longitude;
+                location.address = data[displayKey].address;
+            } else{
+                restraHash[displayKey] = data[displayKey];
+            }
+        });
+        result.push(restraHash);
+        createMarker(location, "<%= asset_path 'consumer_webapp/restrapin.png' %>", true, restraHash);
+    }
+
+    var fetchRestaurants = function (location) {
+        self.requestParams[API[controller].get_restaurant_list.params.lat] = location.lat;
+        self.requestParams[API[controller].get_restaurant_list.params.lon] = location.lng;
+        var options = getRequestOptions('get_restaurant_list');
+        displayField = options.displayKeys;
+        DataService.sendRequest(options.requestOptions, options.responseKey)
+        .then(function (res) {
+            res.forEach(function (restraData) {
+               getDisplayField(restraData.restaurant); 
+            });
+        }, function (err) {
+        });
+    }
+
+
+    $rootScope.$on(EVENTS.LOCATION_CHANGED, function(evt, data){
+        createMap(data);
+        fetchRestaurants(data.location);
+    });
+
+    createMap();
+    
+}]);

@@ -1,0 +1,31 @@
+html, body {
+	height: 100%;
+	padding-top: 0;
+	overflow-x: hidden;
+	background:white;
+}
+.main-header{
+	height: 7%;
+    background: #ffffff;
+    color: #303030;
+    .header-content{
+    	.location-container{
+    		padding: 1% 0;
+    		margin: auto;
+    		.location-pin{
+			    width: 2%;
+    		}
+    		.location{
+    			padding: 0;
+			    color: #303030;
+			    border: none;
+			    outline: none;
+			    display:inline-block;
+			    min-width: 25%;
+    		}
+    	}
+    }
+}
+.main-container{
+	height:93%;
+}

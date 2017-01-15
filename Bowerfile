@@ -1,0 +1,8 @@
+resolution "angular", "1.5.7"
+asset 'angular-ui-router', "0.2.13"
+asset 'angular-bootstrap', "0.14.3"
+asset 'angular-route', "1.4.9"
+asset 'angular-ui-select','0.11.2'
+asset 'angular-cookies', "1.5.7"
+asset 'angular-uuid2'
+asset 'bootstrap-vertical-tabs'

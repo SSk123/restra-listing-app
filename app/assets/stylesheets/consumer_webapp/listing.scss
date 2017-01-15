@@ -1,0 +1,121 @@
+.listing-container{
+	height: 100%;
+	.listing-body-container{
+		height:94%;
+		#map {    
+			height: 100%;   
+			width: 100%;
+			border: solid 1px #888888;
+		    border-radius: 4px;
+		}
+		.marker-container{
+			position: absolute;
+			bottom: 0;
+			background: white;
+			border: solid 1px #888888;
+		    border-radius: 4px;
+			.container-header{
+				.heading{
+					font-size: 12px;
+				    padding: 1% 0;
+				    color: grey;
+				    font-weight: 300;
+				}
+				.close{
+				    font-size: 12px;
+				    padding: 1% 5%;
+				    font-weight: 400;
+				    text-align: center;
+				    cursor: pointer
+				}
+			}
+			.marker-details{
+				border: solid 1px #888888;
+			    .basic-details{
+				    padding: 1% 2%;
+				    .name{
+				    	font-size: 30px;
+					    font-weight: 200;
+					    letter-spacing: 3px;
+				    }
+				    .cusines{
+			    	    font-size: 16px;
+					    letter-spacing: 1px;
+					    font-weight: 200;
+				    }
+				    .green{
+				    	display: inline-block;
+				    	color: #79b922;
+				    	padding: 1% 1% 0 0;
+					    font-size: 16px;
+					    font-weight: bold;
+				    }
+				    .grey{
+				    	display: inline-block;
+				    	color: grey;
+				    	padding: 1% 1% 0 0;
+					    font-size: 16px;
+					    font-weight: bold;
+				    }
+
+				}
+				.photo-container{
+					    border: solid 1px #888888;
+					    border-top: none;
+					    padding: 1% 2%;
+					    text-align: center;
+					    border-bottom: none;
+					    .restra-image{
+				    	    width: 70%;
+						    display: block;
+						    margin: 0 auto;
+						    border-radius: 10px;
+					    }
+					    .image-url{
+					    	padding: 2%;
+						    display: block;
+						    color: #79b922;
+						    font-size: 16px;
+						    font-weight: 300;
+					    }
+				}
+				.rating-container{
+					padding:1% 2%;
+					.rating{
+					    font-size: 40px;
+					    font-weight: 100;
+					    letter-spacing: 3px;
+					}
+					.review{
+						font-size: 20px;
+					    font-weight: 200;
+					}
+					.delivery{
+						padding: 1% 0;
+					    font-size: 20px;
+					    font-weight: 200;
+					    .available{
+					    	color:#79b922;
+					    }
+					    .not-avalaible{
+					    	color:grey;
+					    }
+					}
+					.booking{
+						padding: 1% 0;
+					    font-size: 20px;
+					    font-weight: 200;
+					    .available{
+					    	a{
+						    	color:#79b922;
+					    	}
+					    }
+					    .not-avalaible{
+					    	color:grey;
+					    }
+					}
+				}
+			}
+		}
+	}
+}

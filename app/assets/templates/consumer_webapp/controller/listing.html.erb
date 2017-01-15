@@ -1,0 +1,52 @@
+<div class='listing-container row'>
+	<div class="col-xs-12 listing-body-container">
+		<div id="map"></div>
+		<div class="marker-container col-xs-12" ng-show=listing.showDetailsPanel>
+			<div class="container-header col-xs-12">
+				<div class="col-xs-10 text-center heading" >Powered by Zomato and Google Maps</div>
+				<div class="col-xs-2 close" ng-click="listing.showDetailsPanel = !listing.showDetailsPanel">CLOSE</div>
+			</div>
+			<div class="marker-details col-xs-12">
+				<div class='col-xs-4 basic-details'>
+					<div class="name" ng-bind="listing.restraDetail.name"></div>
+					<div class="cusines" ng-bind="listing.restraDetail.cuisines"></div>
+					<div ng-repeat="i in listing.range track by $index" ng-class="$index < listing.restraDetail.price_range ? 'green' : 'grey'">&#8377;</div>
+				</div>
+				<div class='col-xs-4 photo-container'>
+					<img ng-src="{{listing.restraDetail.featured_image}}" class="restra-image">
+					<a ng-href="{{listing.restraDetail.photos_url}}" target='_blank' class="image-url">To view more photos... </a>
+				</div>
+				<div class='col-xs-4 user-review-container'>
+					<div class="rating-container">
+						<div class="rating" style="color: #{{listing.restraDetail.user_rating.rating_color}}">
+							<span ng-bind="listing.restraDetail.user_rating.aggregate_rating" ></span>
+							<span>/5</span>
+						</div>
+						<div class="reveiew" style="color: #{{listing.restraDetail.user_rating.rating_color}}">
+							<span ng-bind="listing.restraDetail.user_rating.rating_text"></span>
+							<span>&#x25B2;</span><span ng-bind="listing.restraDetail.user_rating.votes"></span><span> votes</span>
+						</div>
+						<div class="delivery">
+							<span>Home Delivery: </span>
+							<span ng-if='listing.restraDetail.has_online_delivery' class="available">		Available 
+							</span>
+							<span ng-if=!'listing.restraDetail.has_online_delivery' class="not-available">	Not Available 
+							</span>
+						</div>
+						<div class="booking">
+							<span>Book a table: </span>
+							<span ng-if='listing.restraDetail.book_url' class="available">
+								<a ng-href="{{listing.restraDetail.book_url}}" target='_blank'>
+									Avail Booking
+								</a>
+							</span>
+							<span ng-if='!listing.restraDetail.book_url' class="not-available">
+								Not Applicable
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runnr</title>
+    <%= stylesheet_link_tag "consumer_webapp", :media => "all" %>
+  	<%= csrf_meta_tags %>
+</head>
+<body ng-app="consumerWebapp" ng-controller="MainCtrl as main">
+	<div class="main-header row">
+		<div class="col-xs-12 header-content">
+			<div class="location-container text-center col-xs-12">
+				<%= image_tag('consumer_webapp/location-pin.png', class: 'location-pin') %>
+				<input class="location"  type="text" placeholder="Enter the location to search restaurants" id="searchLocation">
+			</div>
+		</div>
+	</div>
+	<div class="row main-container" ui-view></div>
+</body>
+	<%= javascript_include_tag "consumer_webapp" %>
+	<script src="https://maps.google.com/maps/api/js?sensor=false&libraries=places" type="text/javascript"></script>
+</html>
